@@ -6,30 +6,39 @@ require("dotenv").config();
 
 const execute = promisify(exec); // death to callbacks
 
-const DB_NAME = process.env.NODE_ENV === "test" ? "test" : "dev";
-const DB_USER = process.env.NODE_ENV === "test" ? "tester" : "developer";
-const DB_PASSWORD = process.env.NODE_ENV === "test" ? "test" : "dev";
+const DB_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.TEST_DB_URL
+    : process.env.DB_URL;
+
+const { username, password, pathname } = new URL(DB_URL);
+const dbName = pathname.replace("/", "");
 
 // uses ANSI escape sequences to style the text
 // https://en.wikipedia.org/wiki/ANSI_escape_code
 const boldGreen = str => "\u001b[1m\u001b[32m" + str + "\u001b[0m";
 const boldRed = str => "\u001b[1m\u001b[31m" + str + "\u001b[0m";
 
-console.log(`\nCreating database '${DB_NAME}'...`);
+console.log(`\nCreating database '${dbName}'...`);
 execute(
   `psql <<EOF
 \\x
-CREATE DATABASE ${DB_NAME};
-CREATE USER ${DB_USER} WITH SUPERUSER PASSWORD '${DB_PASSWORD}';
-ALTER DATABASE ${DB_NAME} OWNER TO ${DB_USER};
+CREATE DATABASE ${dbName};
+CREATE USER ${username} WITH SUPERUSER PASSWORD '${password}';
+ALTER DATABASE ${dbName} OWNER TO ${username};
 EOF`
 )
-  .then(() => console.log(boldGreen(`Created '${DB_NAME}'`)))
-  .then(() => console.log(`\nBuilding database '${DB_NAME}'...`))
+  .then(() => {
+    console.log(boldGreen(`Created '${dbName}'`));
+    console.log(`\nBuilding database '${dbName}'...`);
+  })
   .then(build)
-  .then(() => console.log(boldGreen(`Built '${DB_NAME}'`)))
+  .then(() => {
+    console.log(boldGreen(`Built '${dbName}'`));
+    process.exit(0); // exits immediately to stop terminal hanging
+  })
   .catch(error => {
-    console.log(boldRed(`Error building '${DB_NAME}'\n`));
+    console.log(boldRed(`Error building '${dbName}'\n`));
     console.log(error);
     process.exit(0);
   });
