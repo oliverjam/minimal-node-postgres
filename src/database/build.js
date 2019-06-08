@@ -15,7 +15,7 @@ COMMIT;
 `;
 
 function build() {
-  return db.query(sql).then(() => db.end());
+  return db.query(sql);
 }
 
 module.exports = build;
