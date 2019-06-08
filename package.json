@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "PORT=3001 jest"
+    "pretest": "NODE_ENV=test node src/database/setup.js",
+    "test": "PORT=3001 jest",
+    "setup": "node src/database/setup.js"
   },
   "repository": {
     "type": "git",
