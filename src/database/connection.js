@@ -4,7 +4,7 @@ require("dotenv").config();
 const DB_URL =
   process.env.NODE_ENV === "test"
     ? process.env.TEST_DB_URL
-    : process.env.DB_URL;
+    : process.env.DATABASE_URL;
 
 if (!DB_URL) throw new Error("Enviroment variable DB_URL must be set");
 

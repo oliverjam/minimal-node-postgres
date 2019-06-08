@@ -13,11 +13,11 @@ A minimal boilerplate to get started with Node and Postgres. Includes a database
 
 ### Database
 
-We're using PostgreSQL as our database and the `pg` Node module to connect to it. We create a new connection pool in `src/database/connection.js` using the `DB_URL` from your `.env`.
+We're using PostgreSQL as our database and the `pg` Node module to connect to it. We create a new connection pool in `src/database/connection.js` using the `DATABASE_URL` from your `.env`.
 
 The database tables are built with some example data in `src/database/build.js`.
 
-`src/database/setup.js` is a script for creating a new database using the `psql` CLI. It will use the username/password/database name from the `DB_URL` in your `.env`. It doesn't really matter what you set these to as this won't be used in production.
+`src/database/setup.js` is a script for creating a new database using the `psql` CLI. It will use the username/password/database name from the `DATABASE_URL` in your `.env`. It doesn't really matter what you set these to as this won't be used in production.
 
 You can run this script with `npm run setup` to make sure your dev database is created and built. It's okay to run this multiple times (as long as you don't mind overwriting the data in the tables).
 

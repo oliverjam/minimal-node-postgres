@@ -9,7 +9,7 @@ const execute = promisify(exec); // death to callbacks
 const DB_URL =
   process.env.NODE_ENV === "test"
     ? process.env.TEST_DB_URL
-    : process.env.DB_URL;
+    : process.env.DATABASE_URL;
 
 const { username, password, pathname } = new URL(DB_URL);
 const dbName = pathname.replace("/", "");
