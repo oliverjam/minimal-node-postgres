@@ -13,9 +13,9 @@ describe("Server routes", () => {
     return supertest(server)
       .get("/")
       .expect(200)
-      .expect("content-type", "text/html")
+      .expect("content-type", "application/json")
       .then(response => {
-        expect(response.text).toMatch(/<h1>Hello world<\/h1>/);
+        expect(JSON.parse(response.text)).toEqual({ hello: "world" });
       });
   });
 });
