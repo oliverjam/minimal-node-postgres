@@ -8,7 +8,9 @@
     "dev": "nodemon src/server.js",
     "pretest": "NODE_ENV=test node src/database/setup.js",
     "test": "PORT=3001 jest",
-    "setup": "node src/database/setup.js"
+    "setup": "node src/database/setup.js",
+    "lint": "eslint .",
+    "format": "prettier src/**/* --write"
   },
   "repository": {
     "type": "git",
