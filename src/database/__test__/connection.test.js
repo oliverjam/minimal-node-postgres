@@ -5,6 +5,10 @@ beforeEach(async () => {
   await build();
 });
 
+afterAll(async () => {
+  await db.end();
+});
+
 describe("DB connection", () => {
   test("Returns error when relation does not exist", () => {
     return db.query("SELECT * FROM blah").catch(error => {
