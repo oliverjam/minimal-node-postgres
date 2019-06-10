@@ -29,7 +29,7 @@ Jest will automatically run any test files ending in `.test.js`. It's common to 
 
 The setup script will create a separate test database (using the `TEST_DB_URL` from `.env`) when `NODE_ENV` is set to `"test"`. This will happen automatically in the `pretest` npm script that runs before `npm test`.
 
-There is an example server test using Supertest in `src/__test__/server.test.js`. It will start the server is `server.js` on a different port (so it doesn't clash with your dev server if you have that running on `3000`).
+There is an example server test using Supertest in `src/__test__/server.test.js`. It will start the server in `server.js` on a different port (so it doesn't clash with your dev server if you have that running on `3000`).
 
 There is an example database test in `src/database/__test__/connection.test.js`. It rebuilds the database tables before each test to ensure the tests don't affect each other.
 
