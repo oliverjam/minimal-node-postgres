@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/oliverjam/minimal-node-postgres.svg?branch=master)](https://travis-ci.com/oliverjam/minimal-node-postgres)
+
 # Minimal Node Postgres
 
 A minimal boilerplate to get started with Node and Postgres. Includes a database setup script, testing with Jest & Supertest and basic linting rules.
